@@ -18,7 +18,7 @@
 
 - [x] Task: Write tests for Research Manager (Start, Status, View) [30e163c]
 - [x] Task: Implement `research start` command logic with asynchronous interaction creation [3d1777d]
-- [ ] Task: Implement `research status` and `research view` polling logic
+- [x] Task: Implement `research status` and `research view` polling logic [760edcd]
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Research Lifecycle Implementation' (Protocol in workflow.md)
 
 ## Phase 4: Reporting and Final Integration

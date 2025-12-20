@@ -21,9 +21,9 @@
 - [x] Task: Implement `research status` and `research view` polling logic [760edcd]
 - [x] Task: Conductor - User Manual Verification 'Phase 3: Research Lifecycle Implementation' (Protocol in workflow.md) [c33baae]
 
-## Phase 4: Reporting and Final Integration
+## Phase 4: Reporting and Final Integration [checkpoint: 1dbf162]
 
 - [x] Task: Write tests for Report Generator (Markdown formatting) [8533c9c]
 - [x] Task: Implement `research download` command to save results as Markdown [cea91bd]
 - [x] Task: Integrate File Search Store grounding into the `research start` command [8ee7a46]
-- [ ] Task: Conductor - User Manual Verification 'Phase 4: Reporting and Final Integration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 4: Reporting and Final Integration' (Protocol in workflow.md) [1dbf162]

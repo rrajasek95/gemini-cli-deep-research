@@ -44,4 +44,29 @@ describe('ReportGenerator', () => {
     expect(report).toContain('Block 1');
     expect(report).toContain('Block 2');
   });
+
+  it('should ignore non-text output types', () => {
+    const outputs = [
+      { type: 'image', url: 'http://example.com/img.png' },
+      { type: 'text', text: 'Some text' }
+    ];
+    const report = generator.generateMarkdown(outputs);
+    
+    expect(report).not.toContain('http://example.com/img.png');
+    expect(report).toContain('Some text');
+  });
+
+  it('should handle annotations without source', () => {
+    const outputs = [
+      { 
+        type: 'text', 
+        text: 'Text with annotation but no source',
+        annotations: [{ start_index: 0, end_index: 4 }] 
+      }
+    ];
+    const report = generator.generateMarkdown(outputs);
+    
+    expect(report).toContain('Text with annotation but no source');
+    expect(report).not.toContain('### Citations');
+  });
 });

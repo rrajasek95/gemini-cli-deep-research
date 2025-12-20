@@ -7,12 +7,12 @@
 - [x] Task: Implement Workspace Config Manager for `.gemini-research.json` [0618255]
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Project Initialization & Infrastructure' (Protocol in workflow.md) [c87d8ff]
 
-## Phase 2: File Search Management
+## Phase 2: File Search Management [checkpoint: 58e3e09]
 
 - [x] Task: Write tests for File Search Manager (Create, List, Delete) [32c5f96]
 - [x] Task: Implement File Search Manager using `@google/genai` [d5121d4]
 - [x] Task: Implement local directory scanning and file upload logic [82392b9]
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: File Search Management' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: File Search Management' (Protocol in workflow.md) [58e3e09]
 
 ## Phase 3: Research Lifecycle Implementation
 

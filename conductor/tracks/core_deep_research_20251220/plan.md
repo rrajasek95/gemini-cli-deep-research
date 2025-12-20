@@ -24,6 +24,6 @@
 ## Phase 4: Reporting and Final Integration
 
 - [x] Task: Write tests for Report Generator (Markdown formatting) [8533c9c]
-- [ ] Task: Implement `research download` command to save results as Markdown
+- [x] Task: Implement `research download` command to save results as Markdown [cea91bd]
 - [ ] Task: Integrate File Search Store grounding into the `research start` command
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Reporting and Final Integration' (Protocol in workflow.md)

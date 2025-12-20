@@ -12,6 +12,7 @@ describe('FileSearchManager', () => {
       fileSearchStores: {
         create: jest.fn(),
         list: jest.fn(),
+        get: jest.fn(),
         delete: jest.fn(),
       },
     } as unknown as jest.Mocked<GoogleGenAI>;
@@ -46,11 +47,31 @@ describe('FileSearchManager', () => {
     expect(result).toEqual(mockStores);
   });
 
+  it('should get a file search store', async () => {
+    const mockStore = { name: 'fileSearchStores/my-store', displayName: 'My Store' };
+    (mockGenAI.fileSearchStores.get as jest.Mock).mockResolvedValue(mockStore);
+
+    const result = await manager.getStore('fileSearchStores/my-store');
+    
+    expect(mockGenAI.fileSearchStores.get).toHaveBeenCalledWith('fileSearchStores/my-store');
+    expect(result).toEqual(mockStore);
+  });
+
   it('should delete a file search store', async () => {
     (mockGenAI.fileSearchStores.delete as jest.Mock).mockResolvedValue({});
 
     await manager.deleteStore('fileSearchStores/my-store');
     
-    expect(mockGenAI.fileSearchStores.delete).toHaveBeenCalledWith('fileSearchStores/my-store');
+    expect(mockGenAI.fileSearchStores.delete).toHaveBeenCalledWith('fileSearchStores/my-store', undefined);
+  });
+
+  it('should delete a file search store with force option', async () => {
+    (mockGenAI.fileSearchStores.delete as jest.Mock).mockResolvedValue({});
+
+    await manager.deleteStore('fileSearchStores/my-store', true);
+    
+    expect(mockGenAI.fileSearchStores.delete).toHaveBeenCalledWith('fileSearchStores/my-store', {
+      config: { force: true },
+    });
   });
 });

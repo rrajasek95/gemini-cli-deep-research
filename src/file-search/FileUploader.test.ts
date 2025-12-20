@@ -40,12 +40,35 @@ describe('FileUploader', () => {
     expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith({
       fileSearchStoreName: 'fileSearchStores/my-store',
       file: 'my-dir/file1.txt',
+      config: { displayName: 'file1.txt' }
     });
     expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith({
       fileSearchStoreName: 'fileSearchStores/my-store',
       file: 'my-dir/file2.pdf',
+      config: { displayName: 'file2.pdf' }
     });
     expect(result).toEqual([{ name: 'operations/1' }, { name: 'operations/2' }]);
+  });
+
+  it('should support optional chunkingConfig', async () => {
+    (fs.readdirSync as jest.Mock).mockReturnValue([
+      { name: 'file1.txt', isFile: () => true },
+    ]);
+
+    (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
+      .mockResolvedValueOnce({ name: 'operations/1' });
+
+    const chunkingConfig = { whiteSpaceConfig: { maxTokensPerChunk: 100 } };
+    await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store', { chunkingConfig });
+
+    expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith({
+      fileSearchStoreName: 'fileSearchStores/my-store',
+      file: 'my-dir/file1.txt',
+      config: { 
+        displayName: 'file1.txt',
+        chunkingConfig 
+      }
+    });
   });
 
   it('should ignore non-supported file types if applicable', async () => {

@@ -15,7 +15,11 @@ export class FileSearchManager {
     return await this.client.fileSearchStores.list();
   }
 
-  async deleteStore(name: string) {
-    return await this.client.fileSearchStores.delete(name);
+  async getStore(name: string) {
+    return await this.client.fileSearchStores.get(name);
+  }
+
+  async deleteStore(name: string, force: boolean = false) {
+    return await this.client.fileSearchStores.delete(name, force ? { config: { force } } : undefined);
   }
 }

@@ -14,12 +14,12 @@
 - [x] Task: Implement local directory scanning and file upload logic [82392b9]
 - [x] Task: Conductor - User Manual Verification 'Phase 2: File Search Management' (Protocol in workflow.md) [58e3e09]
 
-## Phase 3: Research Lifecycle Implementation
+## Phase 3: Research Lifecycle Implementation [checkpoint: c33baae]
 
 - [x] Task: Write tests for Research Manager (Start, Status, View) [30e163c]
 - [x] Task: Implement `research start` command logic with asynchronous interaction creation [3d1777d]
 - [x] Task: Implement `research status` and `research view` polling logic [760edcd]
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: Research Lifecycle Implementation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: Research Lifecycle Implementation' (Protocol in workflow.md) [c33baae]
 
 ## Phase 4: Reporting and Final Integration
 

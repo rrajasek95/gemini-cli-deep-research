@@ -11,7 +11,7 @@
 
 - [x] Task: Write tests for File Search Manager (Create, List, Delete) [32c5f96]
 - [x] Task: Implement File Search Manager using `@google/genai` [d5121d4]
-- [ ] Task: Implement local directory scanning and file upload logic
+- [x] Task: Implement local directory scanning and file upload logic [82392b9]
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: File Search Management' (Protocol in workflow.md)
 
 ## Phase 3: Research Lifecycle Implementation

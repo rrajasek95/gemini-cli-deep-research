@@ -8,7 +8,13 @@ describe('FileSearchManager', () => {
   let manager: FileSearchManager;
 
   beforeEach(() => {
-    mockGenAI = new GoogleGenAI({ apiKey: 'test-key' }) as jest.Mocked<GoogleGenAI>;
+    mockGenAI = {
+      fileSearchStores: {
+        create: jest.fn(),
+        list: jest.fn(),
+        delete: jest.fn(),
+      },
+    } as unknown as jest.Mocked<GoogleGenAI>;
     manager = new FileSearchManager(mockGenAI);
   });
 

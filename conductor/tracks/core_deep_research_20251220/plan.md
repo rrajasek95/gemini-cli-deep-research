@@ -17,7 +17,7 @@
 ## Phase 3: Research Lifecycle Implementation
 
 - [x] Task: Write tests for Research Manager (Start, Status, View) [30e163c]
-- [ ] Task: Implement `research start` command logic with asynchronous interaction creation
+- [x] Task: Implement `research start` command logic with asynchronous interaction creation [3d1777d]
 - [ ] Task: Implement `research status` and `research view` polling logic
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Research Lifecycle Implementation' (Protocol in workflow.md)
 

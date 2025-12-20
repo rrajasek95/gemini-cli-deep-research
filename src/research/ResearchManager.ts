@@ -34,4 +34,14 @@ export class ResearchManager {
   async deleteResearch(id: string) {
     return await this.client.interactions.delete(id);
   }
+
+  async pollResearch(id: string, intervalMs: number = 5000) {
+    while (true) {
+      const interaction = await this.getResearchStatus(id);
+      if (interaction.status === 'completed' || interaction.status === 'failed' || interaction.status === 'cancelled') {
+        return interaction;
+      }
+      await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    }
+  }
 }

@@ -64,4 +64,40 @@ describe('ResearchManager', () => {
 
     expect(mockGenAI.interactions.delete).toHaveBeenCalledWith('interaction-123');
   });
+
+  it('should poll research status until completion', async () => {
+    (mockGenAI.interactions.get as jest.Mock)
+      .mockResolvedValueOnce({ id: 'interaction-123', status: 'in_progress' })
+      .mockResolvedValueOnce({ id: 'interaction-123', status: 'completed', outputs: [{ type: 'text', text: 'Result' }] });
+
+    const result = await manager.pollResearch('interaction-123', 10); // 10ms interval for test
+
+    expect(mockGenAI.interactions.get).toHaveBeenCalledTimes(2);
+    expect(result.status).toBe('completed');
+    expect(result.outputs).toEqual([{ type: 'text', text: 'Result' }]);
+  });
+
+  it('should poll research status until failure', async () => {
+    (mockGenAI.interactions.get as jest.Mock)
+      .mockResolvedValueOnce({ id: 'interaction-123', status: 'in_progress' })
+      .mockResolvedValueOnce({ id: 'interaction-123', status: 'failed', error: { message: 'Oops' } });
+
+    const result = await manager.pollResearch('interaction-123', 10);
+
+    expect(mockGenAI.interactions.get).toHaveBeenCalledTimes(2);
+    expect(result.status).toBe('failed');
+    expect(result.error?.message).toBe('Oops');
+  });
+
+  it('should poll research status with default interval', async () => {
+    (mockGenAI.interactions.get as jest.Mock)
+      .mockResolvedValueOnce({ id: 'interaction-123', status: 'completed' });
+
+    // We don't want to actually wait 5 seconds in test, 
+    // but since it completes immediately in this mock, it shouldn't wait.
+    const result = await manager.pollResearch('interaction-123');
+
+    expect(mockGenAI.interactions.get).toHaveBeenCalledTimes(1);
+    expect(result.status).toBe('completed');
+  });
 });

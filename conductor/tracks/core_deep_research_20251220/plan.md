@@ -9,7 +9,7 @@
 
 ## Phase 2: File Search Management
 
-- [ ] Task: Write tests for File Search Manager (Create, List, Delete)
+- [x] Task: Write tests for File Search Manager (Create, List, Delete) [32c5f96]
 - [ ] Task: Implement File Search Manager using `@google/genai`
 - [ ] Task: Implement local directory scanning and file upload logic
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: File Search Management' (Protocol in workflow.md)

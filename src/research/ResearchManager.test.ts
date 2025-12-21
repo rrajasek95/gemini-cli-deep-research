@@ -32,7 +32,7 @@ describe('ResearchManager', () => {
 
     expect(mockGenAI.interactions.create).toHaveBeenCalledWith({
       input: 'Who is Allen Hutchison?',
-      model: 'gemini-2.5-flash',
+      agent: 'gemini-2.5-flash',
       background: true,
       tools: [{ fileSearch: { fileSearchStoreNames: ['my-store'] } }],
     });
@@ -51,7 +51,7 @@ describe('ResearchManager', () => {
 
     expect(mockGenAI.interactions.create).toHaveBeenCalledWith({
       input: 'Search my files',
-      model: 'gemini-2.5-flash',
+      agent: 'gemini-2.5-flash',
       background: true,
       tools: [{
         fileSearch: {
@@ -75,7 +75,7 @@ describe('ResearchManager', () => {
 
     expect(mockGenAI.interactions.create).toHaveBeenCalledWith({
       input: 'Mixed tools',
-      model: 'gemini-2.5-flash',
+      agent: 'gemini-2.5-flash',
       background: true,
       tools: [
         { googleSearch: {} },

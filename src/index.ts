@@ -59,20 +59,29 @@ server.registerTool(
 );
 
 server.registerTool(
-  'file_search_upload_dir',
+  'file_search_upload',
   {
-    description: 'Scans a local directory and uploads all files to a file search store.',
+    description: 'Uploads a file or recursively uploads a directory to a file search store.',
     inputSchema: z.object({
-      dirPath: z.string().describe('Absolute path to the local directory'),
+      path: z.string().describe('Absolute path to the local file or directory'),
       storeName: z.string().describe('The resource name of the file search store (e.g., fileSearchStores/...)'),
     }).shape,
   },
-  async ({ dirPath, storeName }) => {
-    if (!fs.existsSync(dirPath)) {
-      return { isError: true, content: [{ type: 'text', text: `Directory not found: ${dirPath}` }] };
+  async ({ path: fsPath, storeName }) => {
+    if (!fs.existsSync(fsPath)) {
+      return { isError: true, content: [{ type: 'text', text: `Path not found: ${fsPath}` }] };
     }
-    const ops = await fileUploader.uploadDirectory(dirPath, storeName);
-    return { content: [{ type: 'text', text: `Started ${ops.length} upload operations to ${storeName}` }] };
+
+    const stats = fs.statSync(fsPath);
+    if (stats.isDirectory()) {
+        const ops = await fileUploader.uploadDirectory(fsPath, storeName);
+        return { content: [{ type: 'text', text: `Started ${ops.length} upload operations to ${storeName} from directory ${fsPath}` }] };
+    } else if (stats.isFile()) {
+        await fileUploader.uploadFile(fsPath, storeName);
+        return { content: [{ type: 'text', text: `Uploaded file ${fsPath} to ${storeName}` }] };
+    } else {
+        return { isError: true, content: [{ type: 'text', text: `Path is not a file or directory: ${fsPath}` }] };
+    }
   }
 );
 

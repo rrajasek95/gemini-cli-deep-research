@@ -121,6 +121,7 @@ server.registerTool(
   async ({ query, storeName }) => {
     try {
       const interaction = await fileSearchManager.queryStore(storeName, query, defaultModel);
+      console.error('Debug: Interaction Response:', JSON.stringify(interaction, null, 2));
       // Retrieve the last text output
       const outputs = interaction.outputs || [];
       const lastOutput = outputs[outputs.length - 1];

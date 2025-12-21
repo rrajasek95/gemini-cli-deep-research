@@ -20,7 +20,7 @@ The extension automatically manages a `.gemini-research.json` file in the curren
 - `file_search_query`: Ask a specific question against a file search store for grounded answers.
 
 ### Deep Research
-- `research_start`: Start a long-running background research task. You can ground it in your uploaded files by providing `fileSearchStoreNames`.
+- `research_start`: Start a long-running background research task. You can ground it in your uploaded files by providing `fileSearchStoreNames`. Use `report_format` to specify the desired output structure (e.g., "Executive Brief", "Technical Deep Dive", "Comprehensive Research Report").
 - `research_status`: Check if the research is done and retrieve the results.
 - `research_save_report`: Once completed, save the findings as a professional Markdown report.
 

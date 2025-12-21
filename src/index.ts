@@ -141,13 +141,19 @@ server.registerTool(
     description: 'Starts a new Deep Research interaction in the background.',
     inputSchema: z.object({
       input: z.string().describe('The research query or instructions'),
+      report_format: z.string().optional().describe('The desired format of the report (e.g., "Executive Brief", "Technical Deep Dive", "Comprehensive Research Report")'),
       model: z.string().optional().default('deep-research-pro-preview-12-2025').describe('The agent to use (default: deep-research-pro-preview-12-2025)'),
       fileSearchStoreNames: z.array(z.string()).optional().describe('Optional list of file search store names for grounding'),
     }).shape,
   },
-  async ({ input, model, fileSearchStoreNames }) => {
+  async ({ input, report_format, model, fileSearchStoreNames }) => {
+    let finalInput = input;
+    if (report_format) {
+      finalInput = `[Report Format: ${report_format}]\n\n${input}`;
+    }
+
     const interaction = await researchManager.startResearch({
-      input,
+      input: finalInput,
       model,
       fileSearchStoreNames,
     });

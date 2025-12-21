@@ -28,6 +28,8 @@ describe('FileUploader', () => {
       { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
       { name: 'file2.pdf', isFile: () => true, isDirectory: () => false },
     ]);
+    (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
 
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' })
@@ -35,18 +37,24 @@ describe('FileUploader', () => {
 
     const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store');
 
-    expect(fs.readdirSync).toHaveBeenCalledWith('my-dir', { withFileTypes: true });
+    expect(fs.readdirSync).toHaveBeenCalledWith(expect.any(String), { withFileTypes: true });
     expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledTimes(2);
-    // Note: path.resolve('my-dir', 'file1.txt') returns absolute path. 
-    // Since we can't easily predict absolute path in test environment without mocking path.resolve,
-    // we can check if it contains the expected segments or mock path.resolve.
-    // However, the test environment usually has a predictable CWD or we can use expect.stringContaining.
-    
-    // Actually, let's verify arguments loosely or mock path.resolve.
-    // Easier to just verify that uploadFile logic was called.
+    expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith(
+        expect.objectContaining({
+            config: expect.objectContaining({
+                metadata: expect.objectContaining({
+                    path: 'file1.txt',
+                    hash: expect.any(String),
+                    last_modified: '2025-01-01T00:00:00.000Z'
+                })
+            })
+        })
+    );
   });
 
   it('should upload a single file', async () => {
+    (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' });
 
@@ -58,7 +66,12 @@ describe('FileUploader', () => {
             file: 'path/to/file.txt',
             config: expect.objectContaining({
                 displayName: 'file.txt',
-                mimeType: 'text/plain'
+                mimeType: 'text/plain',
+                metadata: {
+                    path: 'file.txt',
+                    hash: 'ed7002b439e9ac845f22357d822bac1444730fbdb6016d3ec9432297b9ec9f73', // hash of 'content'
+                    last_modified: '2025-01-01T00:00:00.000Z'
+                }
             })
         })
     );
@@ -69,6 +82,8 @@ describe('FileUploader', () => {
     (fs.readdirSync as jest.Mock).mockReturnValue([
       { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
     ]);
+    (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
 
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' });

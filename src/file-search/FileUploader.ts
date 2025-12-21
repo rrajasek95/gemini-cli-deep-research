@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as crypto from 'crypto';
 
 export class FileUploader {
   constructor(private client: GoogleGenAI) {}
@@ -29,19 +30,35 @@ export class FileUploader {
     }
   }
 
-  async uploadFile(filePath: string, storeName: string, config?: { chunkingConfig?: any }) {
+  private getFileHash(filePath: string): string {
+    const fileBuffer = fs.readFileSync(filePath);
+    const hashSum = crypto.createHash('sha256');
+    hashSum.update(fileBuffer);
+    return hashSum.digest('hex');
+  }
+
+  async uploadFile(filePath: string, storeName: string, config?: { chunkingConfig?: any, relativePath?: string }) {
     const fileName = path.basename(filePath);
     const mimeType = this.determineMimeType(filePath);
+    const stats = fs.statSync(filePath);
+    const hash = this.getFileHash(filePath);
+    const lastModified = stats.mtime.toISOString();
+    const relativePath = config?.relativePath || fileName;
 
     try {
-      console.error(`Uploading ${fileName} to ${storeName} with mimeType ${mimeType}...`);
+      console.error(`Uploading ${fileName} to ${storeName} with metadata (path: ${relativePath})...`);
       const op = await this.client.fileSearchStores.uploadToFileSearchStore({
         fileSearchStoreName: storeName,
         file: filePath,
         config: {
           displayName: fileName,
           mimeType,
-          ...config,
+          chunkingConfig: config?.chunkingConfig,
+          metadata: {
+            path: relativePath,
+            hash: hash,
+            last_modified: lastModified,
+          }
         },
       });
       return op;
@@ -52,6 +69,7 @@ export class FileUploader {
   }
 
   async uploadDirectory(dirPath: string, storeName: string, config?: { chunkingConfig?: any }) {
+    const absoluteDirPath = path.resolve(dirPath);
     const getFiles = (dir: string): string[] => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       const files: string[] = [];
@@ -66,15 +84,20 @@ export class FileUploader {
       return files;
     };
 
-    const files = getFiles(dirPath);
+    const files = getFiles(absoluteDirPath);
     const operations = [];
     
     for (const filePath of files) {
       // Skip hidden files/directories (starting with .)
       if (path.basename(filePath).startsWith('.')) continue;
       
+      const relativePath = path.relative(absoluteDirPath, filePath);
+      
       try {
-        const op = await this.uploadFile(filePath, storeName, config);
+        const op = await this.uploadFile(filePath, storeName, { 
+            ...config, 
+            relativePath 
+        });
         operations.push(op);
       } catch (error) {
         console.error(error);

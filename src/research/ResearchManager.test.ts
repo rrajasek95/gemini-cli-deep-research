@@ -34,7 +34,9 @@ describe('ResearchManager', () => {
       input: 'Who is Allen Hutchison?',
       model: 'gemini-2.5-flash',
       background: true,
-      tools: [{ fileSearch: { fileSearchStoreNames: ['my-store'] } }]
+      tools: [{ fileSearch: { fileSearchStoreNames: ['my-store'] } }],
+      agent: undefined,
+      config: undefined,
     });
     expect(result).toEqual(mockInteraction);
   });
@@ -57,7 +59,9 @@ describe('ResearchManager', () => {
         fileSearch: {
           fileSearchStoreNames: ['store-1', 'store-2']
         }
-      }]
+      }],
+      agent: undefined,
+      config: undefined,
     });
     expect(result).toEqual(mockInteraction);
   });
@@ -80,7 +84,9 @@ describe('ResearchManager', () => {
       tools: [
         { googleSearch: {} },
         { fileSearch: { fileSearchStoreNames: ['store-1'] } }
-      ]
+      ],
+      agent: undefined,
+      config: undefined,
     });
     expect(result).toEqual(mockInteraction);
   });
@@ -91,7 +97,7 @@ describe('ResearchManager', () => {
 
     const result = await manager.getResearchStatus('interaction-123');
 
-    expect(mockGenAI.interactions.get).toHaveBeenCalledWith('interaction-123');
+    expect(mockGenAI.interactions.get).toHaveBeenCalledWith({ id: 'interaction-123' });
     expect(result).toEqual(mockInteraction);
   });
 
@@ -100,7 +106,7 @@ describe('ResearchManager', () => {
 
     await manager.cancelResearch('interaction-123');
 
-    expect(mockGenAI.interactions.cancel).toHaveBeenCalledWith('interaction-123');
+    expect(mockGenAI.interactions.cancel).toHaveBeenCalledWith({ id: 'interaction-123' });
   });
 
   it('should delete an interaction', async () => {
@@ -108,7 +114,7 @@ describe('ResearchManager', () => {
 
     await manager.deleteResearch('interaction-123');
 
-    expect(mockGenAI.interactions.delete).toHaveBeenCalledWith('interaction-123');
+    expect(mockGenAI.interactions.delete).toHaveBeenCalledWith({ id: 'interaction-123' });
   });
 
   it('should poll research status until completion', async () => {

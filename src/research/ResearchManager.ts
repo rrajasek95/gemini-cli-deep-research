@@ -30,20 +30,20 @@ export class ResearchManager {
       background: true,
       tools: finalTools.length > 0 ? finalTools : undefined,
       agent,
-      agentConfig,
+      config: agentConfig,
     });
   }
 
   async getResearchStatus(id: string) {
-    return await this.client.interactions.get(id);
+    return await this.client.interactions.get({ id });
   }
 
   async cancelResearch(id: string) {
-    return await this.client.interactions.cancel(id);
+    return await this.client.interactions.cancel({ id });
   }
 
   async deleteResearch(id: string) {
-    return await this.client.interactions.delete(id);
+    return await this.client.interactions.delete({ id });
   }
 
   async pollResearch(id: string, intervalMs: number = 5000) {

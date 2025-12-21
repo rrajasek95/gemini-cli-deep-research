@@ -4,6 +4,7 @@
   "description": "A deep research extension for Gemini CLI",
   "main": "dist/index.js",
   "scripts": {
+    "start": "npm run build && node dist/index.js",
     "build": "tsc",
     "test": "jest",
     "lint": "eslint src/**/*.ts",

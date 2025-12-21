@@ -1,11 +1,11 @@
 {
   "name": "gemini-deep-research",
   "version": "1.0.0",
-  "contextFileName": "GEMINI.md",
+  "contextFileName": "deep-research-GEMINI.md",
   "mcpServers": {
     "researchServer": {
-      "command": "node",
-      "args": ["${extensionPath}${/}dist${/}index.js"],
+      "command": "npm",
+      "args": ["start"],
       "cwd": "${extensionPath}"
     }
   }

@@ -6,6 +6,7 @@ import { FileSearchManager } from './file-search/FileSearchManager.js';
 import { FileUploader } from './file-search/FileUploader.js';
 import { ResearchManager } from './research/ResearchManager.js';
 import { ReportGenerator } from './reporting/ReportGenerator.js';
+import { WorkspaceConfigManager } from './config/WorkspaceConfig.js';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -35,6 +36,7 @@ server.registerTool(
   },
   async ({ displayName }) => {
     const store = await fileSearchManager.createStore(displayName);
+    WorkspaceConfigManager.addFileSearchStore(displayName, store.name!);
     return { content: [{ type: 'text', text: `Created store: ${store.name} (${displayName})` }] };
   }
 );
@@ -97,7 +99,7 @@ server.registerTool(
     description: 'Starts a new Deep Research interaction in the background.',
     inputSchema: z.object({
       input: z.string().describe('The research query or instructions'),
-      model: z.string().optional().default('gemini-2.5-flash').describe('The model to use'),
+      model: z.string().optional().default('deep-research-pro-preview-12-2025').describe('The agent to use (default: deep-research-pro-preview-12-2025)'),
       fileSearchStoreNames: z.array(z.string()).optional().describe('Optional list of file search store names for grounding'),
     }).shape,
   },
@@ -107,6 +109,9 @@ server.registerTool(
       model,
       fileSearchStoreNames,
     });
+    if (interaction.id) {
+        WorkspaceConfigManager.addResearchId(interaction.id);
+    }
     return { 
       content: [{ 
         type: 'text', 
@@ -159,6 +164,8 @@ server.registerTool(
 
 async function main() {
   const transport = new StdioServerTransport();
+  // Ensure config file exists
+  WorkspaceConfigManager.load();
   await server.connect(transport);
   console.error('Gemini Deep Research MCP server running on stdio');
 }

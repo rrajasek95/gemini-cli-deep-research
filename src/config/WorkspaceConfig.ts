@@ -14,7 +14,9 @@ export class WorkspaceConfigManager {
 
   static load(): WorkspaceConfig {
     if (!fs.existsSync(this.configPath)) {
-      return { researchIds: [], fileSearchStores: {} };
+      const defaultConfig: WorkspaceConfig = { researchIds: [], fileSearchStores: {} };
+      this.save(defaultConfig);
+      return defaultConfig;
     }
 
     try {

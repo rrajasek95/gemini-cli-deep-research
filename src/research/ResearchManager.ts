@@ -24,9 +24,13 @@ export class ResearchManager {
       });
     }
 
+    // Default to the Deep Research agent if no specific model/agent is provided
+    // The API uses 'agent' for this specific capability.
+    const agentName = model || 'deep-research-pro-preview-12-2025';
+
     return await this.client.interactions.create({
       input,
-      model,
+      agent: agentName,
       background: true,
       tools: finalTools.length > 0 ? finalTools : undefined,
     });

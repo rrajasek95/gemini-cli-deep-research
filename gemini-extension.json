@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "contextFileName": "deep-research-GEMINI.md",
   "mcpServers": {
-    "researchServer": {
+    "gemini-deep-research": {
       "command": "npm",
       "args": ["start"],
       "cwd": "${extensionPath}"

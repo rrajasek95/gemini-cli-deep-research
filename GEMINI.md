@@ -1,8 +1,8 @@
-# gemini-cli-deep-research
+# gemini-deep-research
 
 ## Project Overview
 
-**gemini-cli-deep-research** is an extension for the Gemini CLI that enables deep research capabilities. It is designed to automate complex research workflows, synthesize information from various sources, and generate detailed reports.
+**gemini-deep-research** is an extension for the Gemini CLI that enables deep research capabilities. It is designed to automate complex research workflows, synthesize information from various sources, and generate detailed reports.
 
 The extension leverages the Model Context Protocol (MCP) to integrate seamlessy with the Gemini CLI environment. It allows users to:
 -   Execute multi-step research plans.

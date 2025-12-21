@@ -1,2 +1,2 @@
-# gemini-cli-deep-research
+# gemini-deep-research
 A deep research extension for Gemini CLI

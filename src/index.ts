@@ -1,0 +1,169 @@
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { z } from 'zod';
+import { GoogleGenAI } from '@google/genai';
+import { FileSearchManager } from './file-search/FileSearchManager.js';
+import { FileUploader } from './file-search/FileUploader.js';
+import { ResearchManager } from './research/ResearchManager.js';
+import { ReportGenerator } from './reporting/ReportGenerator.js';
+import * as fs from 'fs';
+import * as path from 'path';
+
+// Initialize SDK and Managers
+const apiKey = process.env.GOOGLE_GENAI_API_KEY || '';
+const client = new GoogleGenAI({ apiKey });
+
+const fileSearchManager = new FileSearchManager(client);
+const fileUploader = new FileUploader(client);
+const researchManager = new ResearchManager(client);
+const reportGenerator = new ReportGenerator();
+
+const server = new McpServer({
+  name: 'gemini-deep-research',
+  version: '1.0.0',
+});
+
+// --- File Search Tools ---
+
+server.registerTool(
+  'file_search_create_store',
+  {
+    description: 'Creates a new file search store for RAG grounding.',
+    inputSchema: z.object({
+      displayName: z.string().describe('The display name for the store'),
+    }).shape,
+  },
+  async ({ displayName }) => {
+    const store = await fileSearchManager.createStore(displayName);
+    return { content: [{ type: 'text', text: `Created store: ${store.name} (${displayName})` }] };
+  }
+);
+
+server.registerTool(
+  'file_search_list_stores',
+  {
+    description: 'Lists all available file search stores.',
+    inputSchema: z.object({}).shape,
+  },
+  async () => {
+    const stores = await fileSearchManager.listStores();
+    const storeList = [];
+    // @ts-ignore - stores is an async iterable Pager
+    for await (const store of stores) {
+      storeList.push({ name: store.name, displayName: store.displayName });
+    }
+    return { content: [{ type: 'text', text: JSON.stringify(storeList, null, 2) }] };
+  }
+);
+
+server.registerTool(
+  'file_search_upload_dir',
+  {
+    description: 'Scans a local directory and uploads all files to a file search store.',
+    inputSchema: z.object({
+      dirPath: z.string().describe('Absolute path to the local directory'),
+      storeName: z.string().describe('The resource name of the file search store (e.g., fileSearchStores/...)'),
+    }).shape,
+  },
+  async ({ dirPath, storeName }) => {
+    if (!fs.existsSync(dirPath)) {
+      return { isError: true, content: [{ type: 'text', text: `Directory not found: ${dirPath}` }] };
+    }
+    const ops = await fileUploader.uploadDirectory(dirPath, storeName);
+    return { content: [{ type: 'text', text: `Started ${ops.length} upload operations to ${storeName}` }] };
+  }
+);
+
+server.registerTool(
+  'file_search_delete_store',
+  {
+    description: 'Deletes a file search store.',
+    inputSchema: z.object({
+      name: z.string().describe('The resource name of the store to delete'),
+      force: z.boolean().optional().default(false).describe('Whether to force delete even if contains documents'),
+    }).shape,
+  },
+  async ({ name, force }) => {
+    await fileSearchManager.deleteStore(name, force);
+    return { content: [{ type: 'text', text: `Deleted store: ${name}` }] };
+  }
+);
+
+// --- Research Tools ---
+
+server.registerTool(
+  'research_start',
+  {
+    description: 'Starts a new Deep Research interaction in the background.',
+    inputSchema: z.object({
+      input: z.string().describe('The research query or instructions'),
+      model: z.string().optional().default('gemini-2.5-flash').describe('The model to use'),
+      fileSearchStoreNames: z.array(z.string()).optional().describe('Optional list of file search store names for grounding'),
+    }).shape,
+  },
+  async ({ input, model, fileSearchStoreNames }) => {
+    const interaction = await researchManager.startResearch({
+      input,
+      model,
+      fileSearchStoreNames,
+    });
+    return { 
+      content: [{ 
+        type: 'text', 
+        text: `Research started. ID: ${interaction.id}\nStatus: ${interaction.status}\nUse research_status to check progress.` 
+      }] 
+    };
+  }
+);
+
+server.registerTool(
+  'research_status',
+  {
+    description: 'Checks the status and retrieves outputs of a Deep Research interaction.',
+    inputSchema: z.object({
+      id: z.string().describe('The interaction ID'),
+    }).shape,
+  },
+  async ({ id }) => {
+    const interaction = await researchManager.getResearchStatus(id);
+    return { content: [{ type: 'text', text: JSON.stringify(interaction, null, 2) }] };
+  }
+);
+
+server.registerTool(
+  'research_save_report',
+  {
+    description: 'Generates a Markdown report from a completed research interaction and saves it to a file.',
+    inputSchema: z.object({
+      id: z.string().describe('The interaction ID'),
+      filePath: z.string().describe('The local file path to save the report (e.g., report.md)'),
+    }).shape,
+  },
+  async ({ id, filePath }) => {
+    const interaction = await researchManager.getResearchStatus(id);
+    if (interaction.status !== 'completed') {
+      return { isError: true, content: [{ type: 'text', text: `Interaction ${id} is not completed. Current status: ${interaction.status}` }] };
+    }
+    
+    if (!interaction.outputs) {
+      return { isError: true, content: [{ type: 'text', text: 'No outputs found for this interaction.' }] };
+    }
+
+    const markdown = reportGenerator.generateMarkdown(interaction.outputs);
+    fs.writeFileSync(filePath, markdown);
+    return { content: [{ type: 'text', text: `Report saved to ${filePath}` }] };
+  }
+);
+
+// --- Start Server ---
+
+async function main() {
+  const transport = new StdioServerTransport();
+  await server.connect(transport);
+  console.error('Gemini Deep Research MCP server running on stdio');
+}
+
+main().catch((error) => {
+  console.error('Fatal error in main:', error);
+  process.exit(1);
+});

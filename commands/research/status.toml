@@ -1,0 +1,5 @@
+prompt = """
+Check the status of the research interaction with ID: {{args}}
+
+Call the `research_status` tool.
+"""

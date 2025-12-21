@@ -12,8 +12,8 @@ export interface StartResearchParams {
 export class ResearchManager {
   constructor(private client: GoogleGenAI) {}
 
-  async startResearch(params: StartResearchParams) {
-    const { input, model, tools = [], fileSearchStoreNames, agent, agentConfig } = params;
+  async startResearch(params: StartResearchParams): Promise<any> {
+    const { input, model, tools = [], fileSearchStoreNames } = params;
     
     const finalTools = [...tools];
     if (fileSearchStoreNames && fileSearchStoreNames.length > 0) {
@@ -29,24 +29,22 @@ export class ResearchManager {
       model,
       background: true,
       tools: finalTools.length > 0 ? finalTools : undefined,
-      agent,
-      config: agentConfig,
     });
   }
 
-  async getResearchStatus(id: string) {
-    return await this.client.interactions.get({ id });
+  async getResearchStatus(id: string): Promise<any> {
+    return await this.client.interactions.get(id);
   }
 
-  async cancelResearch(id: string) {
-    return await this.client.interactions.cancel({ id });
+  async cancelResearch(id: string): Promise<any> {
+    return await this.client.interactions.cancel(id);
   }
 
-  async deleteResearch(id: string) {
-    return await this.client.interactions.delete({ id });
+  async deleteResearch(id: string): Promise<any> {
+    return await this.client.interactions.delete(id);
   }
 
-  async pollResearch(id: string, intervalMs: number = 5000) {
+  async pollResearch(id: string, intervalMs: number = 5000): Promise<any> {
     while (true) {
       const interaction = await this.getResearchStatus(id);
       if (interaction.status === 'completed' || interaction.status === 'failed' || interaction.status === 'cancelled') {

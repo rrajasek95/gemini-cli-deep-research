@@ -1,0 +1,7 @@
+prompt = """
+Please start a deep research interaction with the following input.
+
+Input: {{args}}
+
+Call the `research_start` tool.
+"""

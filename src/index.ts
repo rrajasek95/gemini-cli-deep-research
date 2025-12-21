@@ -30,7 +30,7 @@ const reportGenerator = new ReportGenerator();
 
 const server = new McpServer({
   name: 'gemini-deep-research',
-  version: '1.0.0',
+  version: '0.0.1',
 });
 
 // --- File Search Tools ---

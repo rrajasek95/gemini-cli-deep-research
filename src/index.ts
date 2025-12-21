@@ -11,7 +11,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Initialize SDK and Managers
-const apiKey = process.env.GOOGLE_GENAI_API_KEY || '';
+const apiKey = process.env.GEMINI_DEEP_RESEARCH_API_KEY || process.env.GEMINI_API_KEY;
+
+if (!apiKey) {
+  console.error('Error: API key not found.');
+  console.error('Please set either GEMINI_DEEP_RESEARCH_API_KEY or GEMINI_API_KEY environment variable.');
+  process.exit(1);
+}
+
 const client = new GoogleGenAI({ apiKey });
 
 const fileSearchManager = new FileSearchManager(client);

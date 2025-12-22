@@ -32,3 +32,6 @@ Thumbs.db
 
 # Gemini Research local persistence
 .gemini-research.json
+
+# MIME type validation report (generated, contains environment-specific paths)
+scripts/mime-type-validation-report.json

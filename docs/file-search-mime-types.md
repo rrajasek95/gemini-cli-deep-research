@@ -1,7 +1,7 @@
 # Gemini File Search API: MIME Type Support
 
 > **Last Updated:** 2025-12-21
-> **API Documentation:** https://ai.google.dev/gemini-api/docs/file-search#supported-files
+> **API Documentation:** <https://ai.google.dev/gemini-api/docs/file-search#supported-files>
 
 ## Summary
 
@@ -45,6 +45,7 @@ The following file types have been **confirmed to work** with the Gemini File Se
 ### Text Types (34)
 
 #### Plain Text
+
 | Extension | MIME Type | Description |
 |-----------|-----------|-------------|
 | `.txt` | `text/plain` | Plain text |
@@ -57,6 +58,7 @@ The following file types have been **confirmed to work** with the Gemini File Se
 | `.dockerignore` | `text/plain` | Docker ignore |
 
 #### Markup Languages
+
 | Extension | MIME Type | Description |
 |-----------|-----------|-------------|
 | `.html` | `text/html` | HTML |
@@ -67,6 +69,7 @@ The following file types have been **confirmed to work** with the Gemini File Se
 | `.mkd` | `text/markdown` | Markdown |
 
 #### Programming Languages
+
 | Extension | MIME Type | Language |
 |-----------|-----------|----------|
 | `.c` | `text/x-c` | C |
@@ -89,6 +92,7 @@ The following file types have been **confirmed to work** with the Gemini File Se
 | `.tcl` | `text/x-tcl` | Tcl |
 
 #### Documentation & Specialized
+
 | Extension | MIME Type | Description |
 |-----------|-----------|-------------|
 | `.bib` | `text/x-bibtex` | BibTeX |

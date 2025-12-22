@@ -180,11 +180,15 @@ class MimeTypeValidator {
         duration: Date.now() - testStart,
       });
     } catch (error: any) {
+      // Sanitize error message to use relative paths
+      const rawMessage = error.message || String(error);
+      const sanitizedMessage = rawMessage.replace(this.sampleDir, './sample-files');
+
       this.results.push({
         extension: ext,
         mimeType,
         status: 'fail',
-        message: error.message || String(error),
+        message: sanitizedMessage,
         duration: Date.now() - testStart,
       });
     } finally {
@@ -290,9 +294,9 @@ class MimeTypeValidator {
   /**
    * Saves the report to a JSON file
    */
-  async saveReportToFile(filename: string): Promise<void> {
-    const report = this.generateReport(Date.now() - this.startTime);
-    const reportJson = JSON.stringify(report, null, 2);
+  async saveReportToFile(filename: string, report?: TestReport): Promise<void> {
+    const reportToSave = report ?? this.generateReport(Date.now() - this.startTime);
+    const reportJson = JSON.stringify(reportToSave, null, 2);
     fs.writeFileSync(filename, reportJson);
     console.log(`Report saved to: ${filename}`);
   }
@@ -321,7 +325,7 @@ async function main() {
 
     // Save report to file
     const reportPath = path.join(__dirname, 'mime-type-validation-report.json');
-    await validator.saveReportToFile(reportPath);
+    await validator.saveReportToFile(reportPath, report);
 
     // Exit with error code if there were failures
     if (report.failed > 0) {

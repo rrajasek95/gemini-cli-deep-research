@@ -49,6 +49,7 @@ export class FileUploader {
       chunkingConfig?: any;
       relativePath?: string;
       onProgress?: ProgressCallback;
+      onFileComplete?: () => void;
     }
   ): Promise<any> {
     const fileName = path.basename(filePath);
@@ -87,6 +88,10 @@ export class FileUploader {
           }
         } as any,
       });
+
+      // Call completion callback before emitting progress event
+      // This allows the caller to update counters before the event is emitted
+      config?.onFileComplete?.();
 
       // Emit complete event
       config?.onProgress?.({
@@ -162,6 +167,11 @@ export class FileUploader {
           return this.uploadFile(filePath, storeName, {
             ...config,
             relativePath,
+            onFileComplete: () => {
+              // Increment counter immediately when file completes
+              // This ensures onProgress events have the correct count
+              completedFiles++;
+            },
             onProgress: (event) => {
               // Augment progress events with batch context
               const augmentedEvent = {
@@ -181,7 +191,6 @@ export class FileUploader {
       for (const result of batchResults) {
         if (result.status === 'fulfilled') {
           results.push(result.value);
-          completedFiles++;
         } else {
           console.error('Upload failed:', result.reason);
           failedFiles++;

@@ -1,9 +1,11 @@
 import fs from 'fs';
 import { FileUploader } from './FileUploader';
 import { GoogleGenAI } from '@google/genai';
+import * as mimeTypes from './mimeTypes';
 
 jest.mock('fs');
 jest.mock('@google/genai');
+jest.mock('./mimeTypes');
 
 describe('FileUploader', () => {
   let mockGenAI: jest.Mocked<GoogleGenAI>;
@@ -20,6 +22,9 @@ describe('FileUploader', () => {
     } as unknown as jest.Mocked<GoogleGenAI>;
     uploader = new FileUploader(mockGenAI);
     jest.clearAllMocks();
+
+    // Setup default mock for mimeTypes module
+    (mimeTypes.getMimeTypeWithFallback as jest.Mock).mockReturnValue({ mimeType: 'text/plain', isFallback: false });
   });
 
   it('should scan a directory and upload files', async () => {
@@ -29,7 +34,10 @@ describe('FileUploader', () => {
       { name: 'file2.pdf', isFile: () => true, isDirectory: () => false },
     ]);
     (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
-    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
+    (fs.statSync as jest.Mock).mockReturnValue({
+      mtime: new Date('2025-01-01T00:00:00Z'),
+      size: 1024 // 1 KB - well under limit
+    });
 
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' })
@@ -54,7 +62,10 @@ describe('FileUploader', () => {
 
   it('should upload a single file', async () => {
     (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
-    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
+    (fs.statSync as jest.Mock).mockReturnValue({
+      mtime: new Date('2025-01-01T00:00:00Z'),
+      size: 1024
+    });
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' });
 
@@ -83,7 +94,10 @@ describe('FileUploader', () => {
       { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
     ]);
     (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
-    (fs.statSync as jest.Mock).mockReturnValue({ mtime: new Date('2025-01-01T00:00:00Z') });
+    (fs.statSync as jest.Mock).mockReturnValue({
+      mtime: new Date('2025-01-01T00:00:00Z'),
+      size: 1024
+    });
 
     (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
       .mockResolvedValueOnce({ name: 'operations/1' });
@@ -94,15 +108,262 @@ describe('FileUploader', () => {
     expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith(
         expect.objectContaining({
             fileSearchStoreName: 'fileSearchStores/my-store',
-            config: expect.objectContaining({ 
-                chunkingConfig 
+            config: expect.objectContaining({
+                chunkingConfig
             })
         })
     );
   });
 
-  it('should ignore non-supported file types if applicable', async () => {
-      // For now let's assume it tries to upload everything and let the API handle it, 
-      // or we can add a filter.
+  describe('MIME type validation', () => {
+    it('should throw UnsupportedFileTypeError for unsupported extensions', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (mimeTypes.getMimeTypeWithFallback as jest.Mock).mockReturnValue(null);
+
+      const UnsupportedFileTypeError = jest.requireActual('./mimeTypes').UnsupportedFileTypeError;
+      (mimeTypes.UnsupportedFileTypeError as any) = UnsupportedFileTypeError;
+
+      await expect(
+        uploader.uploadFile('file.exe', 'fileSearchStores/my-store')
+      ).rejects.toThrow();
+    });
+
+    it('should accept files with validated MIME types', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mimeTypes.getMimeTypeWithFallback as jest.Mock).mockReturnValue({ mimeType: 'text/x-python', isFallback: false });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      await expect(
+        uploader.uploadFile('script.py', 'fileSearchStores/my-store')
+      ).resolves.toBeDefined();
+    });
+
+    it('should accept files with fallback MIME types', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mimeTypes.getMimeTypeWithFallback as jest.Mock).mockReturnValue({ mimeType: 'text/plain', isFallback: true });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      await expect(
+        uploader.uploadFile('script.js', 'fileSearchStores/my-store')
+      ).resolves.toBeDefined();
+    });
+
+    it('should use fallback MIME type for common programming files', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mimeTypes.getMimeTypeWithFallback as jest.Mock).mockReturnValue({ mimeType: 'text/plain', isFallback: true });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      await uploader.uploadFile('config.json', 'fileSearchStores/my-store');
+
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith(
+        expect.objectContaining({
+          config: expect.objectContaining({
+            mimeType: 'text/plain'
+          })
+        })
+      );
+    });
+  });
+
+  describe('File size validation', () => {
+    it('should throw FileSizeExceededError for files > 100MB', async () => {
+      const largeFileSize = 101 * 1024 * 1024; // 101 MB
+      (fs.statSync as jest.Mock).mockReturnValue({
+        size: largeFileSize,
+        mtime: new Date()
+      });
+
+      const FileSizeExceededError = jest.requireActual('./mimeTypes').FileSizeExceededError;
+      (mimeTypes.FileSizeExceededError as any) = FileSizeExceededError;
+      (mimeTypes.FILE_SIZE_LIMITS as any) = { MAX_FILE_SIZE_BYTES: 100 * 1024 * 1024 };
+
+      await expect(
+        uploader.uploadFile('largefile.pdf', 'fileSearchStores/my-store')
+      ).rejects.toThrow();
+    });
+
+    it('should accept files <= 100MB', async () => {
+      const validFileSize = 99 * 1024 * 1024; // 99 MB
+      (fs.statSync as jest.Mock).mockReturnValue({
+        size: validFileSize,
+        mtime: new Date()
+      });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      await expect(
+        uploader.uploadFile('file.pdf', 'fileSearchStores/my-store')
+      ).resolves.toBeDefined();
+    });
+  });
+
+  describe('Progress tracking', () => {
+    it('should call progress callback with file_start event', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const onProgress = jest.fn();
+      await uploader.uploadFile('file.txt', 'fileSearchStores/my-store', { onProgress });
+
+      expect(onProgress).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'file_start',
+          currentFile: 'file.txt'
+        })
+      );
+    });
+
+    it('should call progress callback with file_complete event', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const onProgress = jest.fn();
+      await uploader.uploadFile('file.txt', 'fileSearchStores/my-store', { onProgress });
+
+      expect(onProgress).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'file_complete',
+          currentFile: 'file.txt'
+        })
+      );
+    });
+
+    it('should call progress callback with start and complete events for directory', async () => {
+      (fs.readdirSync as jest.Mock).mockReturnValue([
+        { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
+      ]);
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const onProgress = jest.fn();
+      await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store', { onProgress });
+
+      expect(onProgress).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'start',
+          totalFiles: 1,
+          percentage: 0
+        })
+      );
+
+      expect(onProgress).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'complete',
+          totalFiles: 1,
+          percentage: 100
+        })
+      );
+    });
+
+    it('should work without callback (backward compatibility)', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      await expect(
+        uploader.uploadFile('file.txt', 'fileSearchStores/my-store')
+      ).resolves.toBeDefined();
+    });
+  });
+
+  describe('Parallel uploads', () => {
+    it('should upload multiple files in parallel', async () => {
+      (fs.readdirSync as jest.Mock).mockReturnValue([
+        { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
+        { name: 'file2.txt', isFile: () => true, isDirectory: () => false },
+        { name: 'file3.txt', isFile: () => true, isDirectory: () => false },
+      ]);
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store', {
+        parallel: { maxConcurrent: 2 }
+      });
+
+      expect(result.length).toBe(3);
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledTimes(3);
+    });
+
+    it('should continue on individual failures with Promise.allSettled', async () => {
+      (fs.readdirSync as jest.Mock).mockReturnValue([
+        { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
+        { name: 'file2.txt', isFile: () => true, isDirectory: () => false },
+      ]);
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+
+      // First file succeeds, second fails
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
+        .mockResolvedValueOnce({ name: 'op/1' })
+        .mockRejectedValueOnce(new Error('Upload failed'));
+
+      const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store');
+
+      // Should return only successful uploads
+      expect(result.length).toBe(1);
+      expect(result[0]).toEqual({ name: 'op/1' });
+    });
+
+    it('should use default maxConcurrent of 5', async () => {
+      (fs.readdirSync as jest.Mock).mockReturnValue([
+        { name: 'file1.txt', isFile: () => true, isDirectory: () => false },
+      ]);
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      // Should work without specifying parallel config
+      await expect(
+        uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store')
+      ).resolves.toBeDefined();
+    });
+  });
+
+  describe('Error handling', () => {
+    it('should throw FileUploadError when upload fails', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
+        .mockRejectedValue(new Error('API error'));
+
+      const FileUploadError = jest.requireActual('./mimeTypes').FileUploadError;
+      (mimeTypes.FileUploadError as any) = FileUploadError;
+
+      await expect(
+        uploader.uploadFile('file.txt', 'fileSearchStores/my-store')
+      ).rejects.toThrow();
+    });
+
+    it('should call progress callback with file_error event on failure', async () => {
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      const apiError = new Error('API error');
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock)
+        .mockRejectedValue(apiError);
+
+      const FileUploadError = jest.requireActual('./mimeTypes').FileUploadError;
+      (mimeTypes.FileUploadError as any) = FileUploadError;
+
+      const onProgress = jest.fn();
+
+      await expect(
+        uploader.uploadFile('file.txt', 'fileSearchStores/my-store', { onProgress })
+      ).rejects.toThrow();
+
+      expect(onProgress).toHaveBeenCalledWith(
+        expect.objectContaining({
+          type: 'file_error',
+          currentFile: 'file.txt',
+          error: apiError
+        })
+      );
+    });
   });
 });

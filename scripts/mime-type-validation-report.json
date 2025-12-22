@@ -1,0 +1,1647 @@
+{
+  "totalTests": 234,
+  "passed": 36,
+  "failed": 198,
+  "skipped": 0,
+  "results": [
+    {
+      "extension": ".pdf",
+      "mimeType": "application/pdf",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2544
+    },
+    {
+      "extension": ".doc",
+      "mimeType": "application/msword",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.doc: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 68
+    },
+    {
+      "extension": ".docx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.docx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 72
+    },
+    {
+      "extension": ".xls",
+      "mimeType": "application/vnd.ms-excel",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.xls: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".xlsx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.xlsx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 68
+    },
+    {
+      "extension": ".ppt",
+      "mimeType": "application/vnd.ms-powerpoint",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ppt: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".pptx",
+      "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pptx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 67
+    },
+    {
+      "extension": ".odt",
+      "mimeType": "application/vnd.oasis.opendocument.text",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.odt: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".ods",
+      "mimeType": "application/vnd.oasis.opendocument.spreadsheet",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ods: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 66
+    },
+    {
+      "extension": ".odp",
+      "mimeType": "application/vnd.oasis.opendocument.presentation",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.odp: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 77
+    },
+    {
+      "extension": ".zip",
+      "mimeType": "application/zip",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.zip: {\"error\":{\"code\":500,\"message\":\"Internal error encountered.\",\"status\":\"INTERNAL\"}}",
+      "duration": 920
+    },
+    {
+      "extension": ".tar",
+      "mimeType": "application/x-tar",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tar: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 640
+    },
+    {
+      "extension": ".gz",
+      "mimeType": "application/gzip",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gz: {\"error\":{\"code\":500,\"message\":\"Internal error encountered.\",\"status\":\"INTERNAL\"}}",
+      "duration": 873
+    },
+    {
+      "extension": ".bz2",
+      "mimeType": "application/x-bzip2",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.bz2: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 609
+    },
+    {
+      "extension": ".7z",
+      "mimeType": "application/x-7z-compressed",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.7z: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 70
+    },
+    {
+      "extension": ".rar",
+      "mimeType": "application/x-rar-compressed",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rar: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".json",
+      "mimeType": "application/json",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.json: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".xml",
+      "mimeType": "application/xml",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1685
+    },
+    {
+      "extension": ".jsonl",
+      "mimeType": "application/jsonl",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.jsonl: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".ndjson",
+      "mimeType": "application/x-ndjson",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ndjson: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 71
+    },
+    {
+      "extension": ".ipynb",
+      "mimeType": "application/x-ipynb+json",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ipynb: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".class",
+      "mimeType": "application/java-vm",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.class: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 721
+    },
+    {
+      "extension": ".ps1",
+      "mimeType": "application/x-powershell",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ps1: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".psm1",
+      "mimeType": "application/x-powershell",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.psm1: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".psd1",
+      "mimeType": "application/x-powershell",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.psd1: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 67
+    },
+    {
+      "extension": ".graphql",
+      "mimeType": "application/graphql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.graphql: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 721
+    },
+    {
+      "extension": ".gql",
+      "mimeType": "application/graphql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gql: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 715
+    },
+    {
+      "extension": ".wasm",
+      "mimeType": "application/wasm",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.wasm: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 68
+    },
+    {
+      "extension": ".bin",
+      "mimeType": "application/octet-stream",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.bin: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 75
+    },
+    {
+      "extension": ".proto",
+      "mimeType": "application/x-protobuf",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.proto: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 936
+    },
+    {
+      "extension": ".avsc",
+      "mimeType": "application/avro",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.avsc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1027
+    },
+    {
+      "extension": ".parquet",
+      "mimeType": "application/x-parquet",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.parquet: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 633
+    },
+    {
+      "extension": ".arrow",
+      "mimeType": "application/x-apache-arrow",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.arrow: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 829
+    },
+    {
+      "extension": ".txt",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1916
+    },
+    {
+      "extension": ".text",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1963
+    },
+    {
+      "extension": ".log",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2491
+    },
+    {
+      "extension": ".out",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2242
+    },
+    {
+      "extension": ".html",
+      "mimeType": "text/html",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1884
+    },
+    {
+      "extension": ".htm",
+      "mimeType": "text/html",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2003
+    },
+    {
+      "extension": ".xhtml",
+      "mimeType": "application/xhtml+xml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.xhtml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 821
+    },
+    {
+      "extension": ".md",
+      "mimeType": "text/markdown",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1930
+    },
+    {
+      "extension": ".markdown",
+      "mimeType": "text/markdown",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1931
+    },
+    {
+      "extension": ".mdown",
+      "mimeType": "text/markdown",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1840
+    },
+    {
+      "extension": ".mkd",
+      "mimeType": "text/markdown",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2192
+    },
+    {
+      "extension": ".rst",
+      "mimeType": "text/x-rst",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rst: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 58
+    },
+    {
+      "extension": ".adoc",
+      "mimeType": "text/x-asciidoc",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.adoc: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 163
+    },
+    {
+      "extension": ".asciidoc",
+      "mimeType": "text/x-asciidoc",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.asciidoc: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 71
+    },
+    {
+      "extension": ".textile",
+      "mimeType": "text/x-textile",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.textile: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 969
+    },
+    {
+      "extension": ".mediawiki",
+      "mimeType": "text/x-mediawiki",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mediawiki: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 747
+    },
+    {
+      "extension": ".wiki",
+      "mimeType": "text/x-wiki",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.wiki: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 702
+    },
+    {
+      "extension": ".org",
+      "mimeType": "text/x-org",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.org: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1232
+    },
+    {
+      "extension": ".css",
+      "mimeType": "text/css",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.css: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".scss",
+      "mimeType": "text/x-scss",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.scss: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".sass",
+      "mimeType": "text/x-sass",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sass: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 67
+    },
+    {
+      "extension": ".less",
+      "mimeType": "text/x-less",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.less: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 69
+    },
+    {
+      "extension": ".styl",
+      "mimeType": "text/x-stylus",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.styl: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".js",
+      "mimeType": "text/javascript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.js: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".jsx",
+      "mimeType": "text/javascript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.jsx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".mjs",
+      "mimeType": "text/javascript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mjs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 59
+    },
+    {
+      "extension": ".cjs",
+      "mimeType": "text/javascript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cjs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 66
+    },
+    {
+      "extension": ".ts",
+      "mimeType": "text/x-typescript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ts: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".tsx",
+      "mimeType": "text/x-typescript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tsx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".d.ts",
+      "mimeType": "text/x-typescript",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.d.ts: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".c",
+      "mimeType": "text/x-c",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1866
+    },
+    {
+      "extension": ".h",
+      "mimeType": "text/x-c",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2129
+    },
+    {
+      "extension": ".cpp",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cpp: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1042
+    },
+    {
+      "extension": ".cc",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 670
+    },
+    {
+      "extension": ".cxx",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cxx: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1095
+    },
+    {
+      "extension": ".c++",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.c++: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1017
+    },
+    {
+      "extension": ".hpp",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.hpp: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1049
+    },
+    {
+      "extension": ".hh",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.hh: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 732
+    },
+    {
+      "extension": ".hxx",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.hxx: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 802
+    },
+    {
+      "extension": ".h++",
+      "mimeType": "text/x-c++",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.h++: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1059
+    },
+    {
+      "extension": ".cs",
+      "mimeType": "text/x-csharp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".java",
+      "mimeType": "text/x-java",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1933
+    },
+    {
+      "extension": ".kt",
+      "mimeType": "text/x-kotlin",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1945
+    },
+    {
+      "extension": ".kts",
+      "mimeType": "text/x-kotlin",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1658
+    },
+    {
+      "extension": ".scala",
+      "mimeType": "text/x-scala",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.scala: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".sc",
+      "mimeType": "text/x-scala",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sc: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 80
+    },
+    {
+      "extension": ".go",
+      "mimeType": "text/x-go",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1701
+    },
+    {
+      "extension": ".rs",
+      "mimeType": "text/x-rust",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".swift",
+      "mimeType": "text/x-swift",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.swift: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 60
+    },
+    {
+      "extension": ".m",
+      "mimeType": "text/x-objectivec",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.m: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 843
+    },
+    {
+      "extension": ".mm",
+      "mimeType": "text/x-objectivec",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mm: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 739
+    },
+    {
+      "extension": ".py",
+      "mimeType": "text/x-python",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1786
+    },
+    {
+      "extension": ".pyw",
+      "mimeType": "text/x-python",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1695
+    },
+    {
+      "extension": ".pyx",
+      "mimeType": "text/x-python",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2120
+    },
+    {
+      "extension": ".pyi",
+      "mimeType": "text/x-python",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1878
+    },
+    {
+      "extension": ".rb",
+      "mimeType": "text/x-ruby",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rb: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 817
+    },
+    {
+      "extension": ".rbw",
+      "mimeType": "text/x-ruby",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rbw: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 815
+    },
+    {
+      "extension": ".rake",
+      "mimeType": "text/x-ruby",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rake: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 669
+    },
+    {
+      "extension": ".gemspec",
+      "mimeType": "text/x-ruby",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gemspec: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 667
+    },
+    {
+      "extension": ".php",
+      "mimeType": "text/x-php",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.php: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 862
+    },
+    {
+      "extension": ".php3",
+      "mimeType": "text/x-php",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.php3: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1111
+    },
+    {
+      "extension": ".php4",
+      "mimeType": "text/x-php",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.php4: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 754
+    },
+    {
+      "extension": ".php5",
+      "mimeType": "text/x-php",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.php5: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 704
+    },
+    {
+      "extension": ".phtml",
+      "mimeType": "text/x-php",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.phtml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 835
+    },
+    {
+      "extension": ".pl",
+      "mimeType": "text/x-perl",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1817
+    },
+    {
+      "extension": ".pm",
+      "mimeType": "text/x-perl",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2130
+    },
+    {
+      "extension": ".t",
+      "mimeType": "text/x-perl",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1747
+    },
+    {
+      "extension": ".pod",
+      "mimeType": "text/x-perl",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1949
+    },
+    {
+      "extension": ".lua",
+      "mimeType": "text/x-lua",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1876
+    },
+    {
+      "extension": ".r",
+      "mimeType": "text/x-r",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.r: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1032
+    },
+    {
+      "extension": ".rmd",
+      "mimeType": "text/x-r",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rmd: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 795
+    },
+    {
+      "extension": ".hs",
+      "mimeType": "text/x-haskell",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.hs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 66
+    },
+    {
+      "extension": ".lhs",
+      "mimeType": "text/x-haskell",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.lhs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 59
+    },
+    {
+      "extension": ".erl",
+      "mimeType": "text/x-erlang",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2267
+    },
+    {
+      "extension": ".hrl",
+      "mimeType": "text/x-erlang",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1810
+    },
+    {
+      "extension": ".ex",
+      "mimeType": "text/x-elixir",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ex: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 838
+    },
+    {
+      "extension": ".exs",
+      "mimeType": "text/x-elixir",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.exs: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 737
+    },
+    {
+      "extension": ".clj",
+      "mimeType": "text/x-clojure",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.clj: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 793
+    },
+    {
+      "extension": ".cljs",
+      "mimeType": "text/x-clojure",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cljs: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 633
+    },
+    {
+      "extension": ".cljc",
+      "mimeType": "text/x-clojure",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cljc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 702
+    },
+    {
+      "extension": ".edn",
+      "mimeType": "text/x-clojure",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.edn: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 672
+    },
+    {
+      "extension": ".ml",
+      "mimeType": "text/x-ocaml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 753
+    },
+    {
+      "extension": ".mli",
+      "mimeType": "text/x-ocaml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mli: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 737
+    },
+    {
+      "extension": ".fs",
+      "mimeType": "text/x-fsharp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.fs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 71
+    },
+    {
+      "extension": ".fsi",
+      "mimeType": "text/x-fsharp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.fsi: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 60
+    },
+    {
+      "extension": ".fsx",
+      "mimeType": "text/x-fsharp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.fsx: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".groovy",
+      "mimeType": "text/x-groovy",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.groovy: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 919
+    },
+    {
+      "extension": ".gradle",
+      "mimeType": "text/x-groovy",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gradle: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1112
+    },
+    {
+      "extension": ".dart",
+      "mimeType": "text/x-dart",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.dart: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 908
+    },
+    {
+      "extension": ".sh",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sh: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".bash",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.bash: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".zsh",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.zsh: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".fish",
+      "mimeType": "text/x-fish",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.fish: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".ksh",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ksh: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".csh",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.csh: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".tcsh",
+      "mimeType": "text/x-sh",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tcsh: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 66
+    },
+    {
+      "extension": ".bat",
+      "mimeType": "text/x-bat",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.bat: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 752
+    },
+    {
+      "extension": ".cmd",
+      "mimeType": "text/x-bat",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cmd: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 694
+    },
+    {
+      "extension": ".yaml",
+      "mimeType": "text/x-yaml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.yaml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 775
+    },
+    {
+      "extension": ".yml",
+      "mimeType": "text/x-yaml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.yml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 874
+    },
+    {
+      "extension": ".toml",
+      "mimeType": "text/x-toml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.toml: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 849
+    },
+    {
+      "extension": ".ini",
+      "mimeType": "text/x-ini",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ini: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 821
+    },
+    {
+      "extension": ".cfg",
+      "mimeType": "text/x-config",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cfg: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 888
+    },
+    {
+      "extension": ".conf",
+      "mimeType": "text/x-config",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.conf: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 972
+    },
+    {
+      "extension": ".config",
+      "mimeType": "text/x-config",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.config: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 880
+    },
+    {
+      "extension": ".properties",
+      "mimeType": "text/x-java-properties",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.properties: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 68
+    },
+    {
+      "extension": ".prop",
+      "mimeType": "text/x-properties",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.prop: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 160
+    },
+    {
+      "extension": ".env",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1959
+    },
+    {
+      "extension": ".editorconfig",
+      "mimeType": "text/x-editorconfig",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.editorconfig: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 796
+    },
+    {
+      "extension": ".gitignore",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 2065
+    },
+    {
+      "extension": ".gitattributes",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1861
+    },
+    {
+      "extension": ".dockerignore",
+      "mimeType": "text/plain",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1577
+    },
+    {
+      "extension": ".npmrc",
+      "mimeType": "text/x-npmrc",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.npmrc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 603
+    },
+    {
+      "extension": ".yarnrc",
+      "mimeType": "text/x-yarnrc",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.yarnrc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 744
+    },
+    {
+      "extension": ".csv",
+      "mimeType": "text/csv",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.csv: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 68
+    },
+    {
+      "extension": ".tsv",
+      "mimeType": "text/tab-separated-values",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tsv: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".psv",
+      "mimeType": "text/x-psv",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.psv: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 58
+    },
+    {
+      "extension": ".sql",
+      "mimeType": "text/x-sql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".mysql",
+      "mimeType": "text/x-mysql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mysql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".pgsql",
+      "mimeType": "text/x-pgsql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pgsql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 69
+    },
+    {
+      "extension": ".plsql",
+      "mimeType": "text/x-plsql",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.plsql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 162
+    },
+    {
+      "extension": ".cql",
+      "mimeType": "text/x-cassandra",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 60
+    },
+    {
+      "extension": ".sparql",
+      "mimeType": "application/sparql-query",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sparql: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".ejs",
+      "mimeType": "text/x-ejs",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ejs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 67
+    },
+    {
+      "extension": ".hbs",
+      "mimeType": "text/x-handlebars",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.hbs: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 166
+    },
+    {
+      "extension": ".handlebars",
+      "mimeType": "text/x-handlebars",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.handlebars: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".mustache",
+      "mimeType": "text/x-mustache",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mustache: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".pug",
+      "mimeType": "text/x-pug",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pug: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 978
+    },
+    {
+      "extension": ".jade",
+      "mimeType": "text/x-jade",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.jade: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1375
+    },
+    {
+      "extension": ".twig",
+      "mimeType": "text/x-twig",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.twig: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 691
+    },
+    {
+      "extension": ".njk",
+      "mimeType": "text/x-nunjucks",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.njk: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".jinja",
+      "mimeType": "text/x-jinja2",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.jinja: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 637
+    },
+    {
+      "extension": ".jinja2",
+      "mimeType": "text/x-jinja2",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.jinja2: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 738
+    },
+    {
+      "extension": ".j2",
+      "mimeType": "text/x-jinja2",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.j2: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 681
+    },
+    {
+      "extension": ".erb",
+      "mimeType": "text/x-ruby-template",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.erb: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 730
+    },
+    {
+      "extension": ".make",
+      "mimeType": "text/x-makefile",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.make: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 592
+    },
+    {
+      "extension": ".mk",
+      "mimeType": "text/x-makefile",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.mk: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 742
+    },
+    {
+      "extension": ".cmake",
+      "mimeType": "text/x-cmake",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cmake: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 693
+    },
+    {
+      "extension": ".ninja",
+      "mimeType": "text/x-ninja",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ninja: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 705
+    },
+    {
+      "extension": ".ant",
+      "mimeType": "text/x-ant",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ant: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 791
+    },
+    {
+      "extension": ".tex",
+      "mimeType": "text/x-latex",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tex: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 897
+    },
+    {
+      "extension": ".latex",
+      "mimeType": "text/x-latex",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.latex: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 797
+    },
+    {
+      "extension": ".bib",
+      "mimeType": "text/x-bibtex",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1674
+    },
+    {
+      "extension": ".man",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.man: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 751
+    },
+    {
+      "extension": ".1",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.1: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 887
+    },
+    {
+      "extension": ".2",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.2: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 771
+    },
+    {
+      "extension": ".3",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.3: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 676
+    },
+    {
+      "extension": ".4",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.4: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 761
+    },
+    {
+      "extension": ".5",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.5: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 826
+    },
+    {
+      "extension": ".6",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.6: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1034
+    },
+    {
+      "extension": ".7",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.7: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1019
+    },
+    {
+      "extension": ".8",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.8: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 753
+    },
+    {
+      "extension": ".9",
+      "mimeType": "text/x-troff-man",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.9: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 752
+    },
+    {
+      "extension": ".graphviz",
+      "mimeType": "text/x-graphviz",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.graphviz: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 736
+    },
+    {
+      "extension": ".dot",
+      "mimeType": "text/x-graphviz",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.dot: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1046
+    },
+    {
+      "extension": ".gv",
+      "mimeType": "text/x-graphviz",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gv: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 576
+    },
+    {
+      "extension": ".diff",
+      "mimeType": "text/x-diff",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1887
+    },
+    {
+      "extension": ".patch",
+      "mimeType": "text/x-patch",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.patch: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 824
+    },
+    {
+      "extension": ".awk",
+      "mimeType": "text/x-awk",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.awk: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1009
+    },
+    {
+      "extension": ".sed",
+      "mimeType": "text/x-sed",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.sed: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 60
+    },
+    {
+      "extension": ".lex",
+      "mimeType": "text/x-lex",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.lex: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1120
+    },
+    {
+      "extension": ".flex",
+      "mimeType": "text/x-flex",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.flex: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 843
+    },
+    {
+      "extension": ".yacc",
+      "mimeType": "text/x-yacc",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.yacc: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 830
+    },
+    {
+      "extension": ".bison",
+      "mimeType": "text/x-bison",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.bison: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 57
+    },
+    {
+      "extension": ".asm",
+      "mimeType": "text/x-assembly",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.asm: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".s",
+      "mimeType": "text/x-assembly",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.s: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 67
+    },
+    {
+      "extension": ".lisp",
+      "mimeType": "text/x-common-lisp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.lisp: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    },
+    {
+      "extension": ".lsp",
+      "mimeType": "text/x-common-lisp",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.lsp: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".scm",
+      "mimeType": "text/x-scheme",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.scm: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 65
+    },
+    {
+      "extension": ".ss",
+      "mimeType": "text/x-scheme",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ss: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 61
+    },
+    {
+      "extension": ".rkt",
+      "mimeType": "text/x-racket",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.rkt: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 726
+    },
+    {
+      "extension": ".v",
+      "mimeType": "text/x-verilog",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.v: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 624
+    },
+    {
+      "extension": ".vhd",
+      "mimeType": "text/x-vhdl",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.vhd: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 714
+    },
+    {
+      "extension": ".vhdl",
+      "mimeType": "text/x-vhdl",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.vhdl: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 738
+    },
+    {
+      "extension": ".tcl",
+      "mimeType": "text/x-tcl",
+      "status": "pass",
+      "message": "Upload successful",
+      "duration": 1727
+    },
+    {
+      "extension": ".m4",
+      "mimeType": "text/x-m4",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.m4: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1051
+    },
+    {
+      "extension": ".pas",
+      "mimeType": "text/x-pascal",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pas: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 59
+    },
+    {
+      "extension": ".pp",
+      "mimeType": "text/x-pascal",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pp: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".for",
+      "mimeType": "text/x-fortran",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.for: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 782
+    },
+    {
+      "extension": ".f",
+      "mimeType": "text/x-fortran",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.f: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 716
+    },
+    {
+      "extension": ".f90",
+      "mimeType": "text/x-fortran",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.f90: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 647
+    },
+    {
+      "extension": ".f95",
+      "mimeType": "text/x-fortran",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.f95: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 890
+    },
+    {
+      "extension": ".cob",
+      "mimeType": "text/x-cobol",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cob: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 896
+    },
+    {
+      "extension": ".cbl",
+      "mimeType": "text/x-cobol",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.cbl: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 767
+    },
+    {
+      "extension": ".pro",
+      "mimeType": "text/x-prolog",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.pro: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 785
+    },
+    {
+      "extension": ".p",
+      "mimeType": "text/x-prolog",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.p: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 572
+    },
+    {
+      "extension": ".st",
+      "mimeType": "text/x-smalltalk",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.st: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 59
+    },
+    {
+      "extension": ".proto3",
+      "mimeType": "text/x-protobuf",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.proto3: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 702
+    },
+    {
+      "extension": ".tf",
+      "mimeType": "text/x-terraform",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tf: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 685
+    },
+    {
+      "extension": ".tfvars",
+      "mimeType": "text/x-terraform",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.tfvars: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 772
+    },
+    {
+      "extension": ".dockerfile",
+      "mimeType": "text/x-dockerfile",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.dockerfile: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 736
+    },
+    {
+      "extension": ".ansible",
+      "mimeType": "text/x-ansible",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ansible: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".htaccess",
+      "mimeType": "text/x-apache-conf",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.htaccess: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1174
+    },
+    {
+      "extension": ".nginx",
+      "mimeType": "text/x-nginx-conf",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.nginx: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 782
+    },
+    {
+      "extension": ".gitconfig",
+      "mimeType": "text/x-git-config",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.gitconfig: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 1097
+    },
+    {
+      "extension": ".svg",
+      "mimeType": "image/svg+xml",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.svg: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 63
+    },
+    {
+      "extension": ".eml",
+      "mimeType": "message/rfc822",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.eml: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".msg",
+      "mimeType": "application/vnd.ms-outlook",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.msg: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 62
+    },
+    {
+      "extension": ".ged",
+      "mimeType": "text/x-gedcom",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.ged: {\"error\":{\"code\":400,\"message\":\"Request contains an invalid argument.\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 761
+    },
+    {
+      "extension": ".fhir",
+      "mimeType": "application/fhir+json",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.fhir: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 59
+    },
+    {
+      "extension": ".shex",
+      "mimeType": "text/shex",
+      "status": "fail",
+      "message": "Failed to upload /Users/allen/src/gemini-cli-deep-research/scripts/sample-files/test.shex: {\"error\":{\"code\":400,\"message\":\"* UploadToFileSearchStoreRequest.mime_type: When provided, MIME type must be in a valid type/subtype format (e.g., 'text/plain', 'application/pdf').\\n\",\"status\":\"INVALID_ARGUMENT\"}}",
+      "duration": 64
+    }
+  ],
+  "duration": 169311
+}

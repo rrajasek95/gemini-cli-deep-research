@@ -83,8 +83,19 @@ server.registerTool(
 
     const stats = fs.statSync(fsPath);
     if (stats.isDirectory()) {
-        const ops = await fileUploader.uploadDirectory(fsPath, storeName);
-        return { content: [{ type: 'text', text: `Started ${ops.length} upload operations to ${storeName} from directory ${fsPath}` }] };
+        const ops = await fileUploader.uploadDirectory(fsPath, storeName, {
+          onProgress: (event) => {
+            // Log progress events to stderr for visibility
+            if (event.type === 'start') {
+              console.error(`Starting upload of ${event.totalFiles} files...`);
+            } else if (event.type === 'file_complete') {
+              console.error(`[${event.percentage}%] Uploaded: ${event.currentFile}`);
+            } else if (event.type === 'complete') {
+              console.error(`Upload complete: ${event.completedFiles} succeeded, ${event.failedFiles} failed`);
+            }
+          }
+        });
+        return { content: [{ type: 'text', text: `Completed ${ops.length} upload operations to ${storeName} from directory ${fsPath}` }] };
     } else if (stats.isFile()) {
         await fileUploader.uploadFile(fsPath, storeName);
         return { content: [{ type: 'text', text: `Uploaded file ${fsPath} to ${storeName}` }] };

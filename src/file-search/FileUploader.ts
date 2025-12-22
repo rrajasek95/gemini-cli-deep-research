@@ -13,7 +13,11 @@ import {
 import { FileSearchManager } from './FileSearchManager';
 
 /**
- * Represents the hash information for a file in the store
+ * Represents metadata for an existing file in the store.
+ * Used by smart sync to compare local files against stored documents.
+ *
+ * @property hash - SHA-256 hash of the file content
+ * @property documentName - Full resource name of the document (e.g., "documents/123")
  */
 interface ExistingFileInfo {
   hash: string;
@@ -38,12 +42,13 @@ export class FileUploader {
       const documents = await this.fileSearchManager.listDocuments(storeName);
 
       for (const doc of documents) {
-        // Extract hash and path from customMetadata
-        const metadata = doc.customMetadata || [];
+        // Extract hash and path from customMetadata with defensive checks
+        const metadata = Array.isArray(doc.customMetadata) ? doc.customMetadata : [];
         let filePath: string | undefined;
         let hash: string | undefined;
 
         for (const meta of metadata) {
+          if (!meta || typeof meta.key !== 'string') continue;
           if (meta.key === 'path') {
             filePath = meta.stringValue;
           } else if (meta.key === 'hash') {

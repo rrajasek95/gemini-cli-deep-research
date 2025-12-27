@@ -548,4 +548,92 @@ describe('FileUploader', () => {
       );
     });
   });
+
+  describe('Gitignore filtering', () => {
+    it('should skip files matching .gitignore patterns', async () => {
+      // Mock .gitignore exists and contains patterns
+      (fs.existsSync as jest.Mock).mockImplementation((p: string) => {
+        if (p.endsWith('.gitignore')) return true;
+        return true;
+      });
+      (fs.readFileSync as jest.Mock).mockImplementation((p: string) => {
+        if (p.endsWith('.gitignore')) return 'node_modules/\n*.log\ndist/';
+        return Buffer.from('content');
+      });
+      (fs.readdirSync as jest.Mock).mockImplementation((dir: string) => {
+        if (dir.includes('node_modules') || dir.includes('dist')) {
+          return [];
+        }
+        return [
+          { name: 'src.ts', isFile: () => true, isDirectory: () => false },
+          { name: 'debug.log', isFile: () => true, isDirectory: () => false },
+          { name: 'node_modules', isFile: () => false, isDirectory: () => true },
+          { name: 'dist', isFile: () => false, isDirectory: () => true },
+        ];
+      });
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store');
+
+      // Should only upload src.ts (node_modules/, dist/ dirs and *.log files should be ignored)
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledTimes(1);
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith(
+        expect.objectContaining({
+          config: expect.objectContaining({
+            displayName: 'src.ts'
+          })
+        })
+      );
+    });
+
+    it('should always ignore .git directory even without .gitignore', async () => {
+      (fs.existsSync as jest.Mock).mockImplementation((p: string) => {
+        if (p.endsWith('.gitignore')) return false;
+        return true;
+      });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (fs.readdirSync as jest.Mock).mockImplementation((dir: string) => {
+        if (dir.includes('.git')) {
+          return [{ name: 'config', isFile: () => true, isDirectory: () => false }];
+        }
+        return [
+          { name: 'file.ts', isFile: () => true, isDirectory: () => false },
+          { name: '.git', isFile: () => false, isDirectory: () => true },
+        ];
+      });
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store');
+
+      // Should only upload file.ts (.git directory should be ignored)
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledTimes(1);
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledWith(
+        expect.objectContaining({
+          config: expect.objectContaining({
+            displayName: 'file.ts'
+          })
+        })
+      );
+    });
+
+    it('should upload all files when no .gitignore exists', async () => {
+      (fs.existsSync as jest.Mock).mockImplementation((p: string) => {
+        if (p.endsWith('.gitignore')) return false;
+        return true;
+      });
+      (fs.readFileSync as jest.Mock).mockReturnValue(Buffer.from('content'));
+      (fs.readdirSync as jest.Mock).mockReturnValue([
+        { name: 'file1.ts', isFile: () => true, isDirectory: () => false },
+        { name: 'file2.ts', isFile: () => true, isDirectory: () => false },
+      ]);
+      (fs.statSync as jest.Mock).mockReturnValue({ size: 1024, mtime: new Date() });
+      (mockGenAI.fileSearchStores.uploadToFileSearchStore as jest.Mock).mockResolvedValue({ name: 'op/1' });
+
+      const result = await uploader.uploadDirectory('my-dir', 'fileSearchStores/my-store');
+
+      expect(mockGenAI.fileSearchStores.uploadToFileSearchStore).toHaveBeenCalledTimes(2);
+    });
+  });
 });

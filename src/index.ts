@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { GoogleGenAI } from '@google/genai';
 import { FileSearchManager } from './file-search/FileSearchManager.js';
 import { FileUploader } from './file-search/FileUploader.js';
+import { UploadOperationManager } from './file-search/UploadOperationManager.js';
 import { ResearchManager } from './research/ResearchManager.js';
 import { ReportGenerator } from './reporting/ReportGenerator.js';
 import { WorkspaceConfigManager } from './config/WorkspaceConfig.js';
@@ -25,6 +26,7 @@ const defaultModel = process.env.GEMINI_DEEP_RESEARCH_MODEL || process.env.GEMIN
 
 const fileSearchManager = new FileSearchManager(client);
 const fileUploader = new FileUploader(client);
+const uploadOperationManager = new UploadOperationManager();
 const researchManager = new ResearchManager(client);
 const reportGenerator = new ReportGenerator();
 
@@ -70,7 +72,7 @@ server.registerTool(
 server.registerTool(
   'file_search_upload',
   {
-    description: 'Uploads a file or recursively uploads a directory to a file search store. Use smartSync to skip unchanged files.',
+    description: 'Starts an async upload of a file or directory to a file search store. Returns immediately with an operation ID. Use file_search_upload_status to check progress.',
     inputSchema: z.object({
       path: z.string().describe('Absolute path to the local file or directory'),
       storeName: z.string().describe('The resource name of the file search store (e.g., fileSearchStores/...)'),
@@ -83,33 +85,72 @@ server.registerTool(
     }
 
     const stats = fs.statSync(fsPath);
-    if (stats.isDirectory()) {
-        let lastSkippedCount = 0;
-        const ops = await fileUploader.uploadDirectory(fsPath, storeName, {
-          smartSync,
-          onProgress: (event) => {
-            // Log progress events to stderr for visibility
-            if (event.type === 'start') {
-              console.error(`Starting upload of ${event.totalFiles} files...${smartSync ? ' (smart sync enabled)' : ''}`);
-            } else if (event.type === 'file_complete') {
-              console.error(`[${event.percentage}%] Uploaded: ${event.currentFile}`);
-            } else if (event.type === 'file_skipped') {
-              console.error(`[${event.percentage}%] Skipped (unchanged): ${event.currentFile}`);
-              lastSkippedCount = event.skippedFiles ?? 0;
-            } else if (event.type === 'complete') {
-              const skipped = event.skippedFiles ?? 0;
-              console.error(`Upload complete: ${event.completedFiles} uploaded, ${skipped} skipped, ${event.failedFiles} failed`);
-            }
-          }
-        });
-        const skippedMsg = smartSync ? `, ${lastSkippedCount} skipped (unchanged)` : '';
-        return { content: [{ type: 'text', text: `Completed ${ops.length} upload operations to ${storeName} from directory ${fsPath}${skippedMsg}` }] };
-    } else if (stats.isFile()) {
-        await fileUploader.uploadFile(fsPath, storeName);
-        return { content: [{ type: 'text', text: `Uploaded file ${fsPath} to ${storeName}` }] };
-    } else {
-        return { isError: true, content: [{ type: 'text', text: `Path is not a file or directory: ${fsPath}` }] };
+    if (!stats.isDirectory() && !stats.isFile()) {
+      return { isError: true, content: [{ type: 'text', text: `Path is not a file or directory: ${fsPath}` }] };
     }
+
+    // Create the operation record
+    const operation = uploadOperationManager.createOperation(fsPath, storeName, smartSync);
+    const operationId = operation.id;
+
+    // Start the upload in the background (fire-and-forget)
+    (async () => {
+      try {
+        if (stats.isDirectory()) {
+          let completedFiles = 0;
+          let skippedFiles = 0;
+          let failedFiles = 0;
+
+          await fileUploader.uploadDirectory(fsPath, storeName, {
+            smartSync,
+            onProgress: (event) => {
+              if (event.type === 'start') {
+                // Mark as in progress with total file count from the uploader
+                uploadOperationManager.markInProgress(operationId, event.totalFiles ?? 0);
+                console.error(`[${operationId}] Starting upload of ${event.totalFiles} files...${smartSync ? ' (smart sync enabled)' : ''}`);
+              } else if (event.type === 'file_complete') {
+                completedFiles = event.completedFiles ?? completedFiles;
+                console.error(`[${operationId}] [${event.percentage}%] Uploaded: ${event.currentFile}`);
+                uploadOperationManager.updateProgress(operationId, completedFiles, skippedFiles, failedFiles);
+              } else if (event.type === 'file_skipped') {
+                skippedFiles = event.skippedFiles ?? skippedFiles;
+                console.error(`[${operationId}] [${event.percentage}%] Skipped (unchanged): ${event.currentFile}`);
+                uploadOperationManager.updateProgress(operationId, completedFiles, skippedFiles, failedFiles);
+              } else if (event.type === 'file_error') {
+                failedFiles++;
+                console.error(`[${operationId}] Error uploading: ${event.currentFile}`);
+                uploadOperationManager.updateProgress(operationId, completedFiles, skippedFiles, failedFiles);
+              } else if (event.type === 'complete') {
+                console.error(`[${operationId}] Upload complete: ${event.completedFiles} uploaded, ${event.skippedFiles ?? 0} skipped, ${event.failedFiles} failed`);
+              }
+            }
+          });
+
+          uploadOperationManager.markCompleted(operationId);
+        } else {
+          // Single file upload
+          uploadOperationManager.markInProgress(operationId, 1);
+          console.error(`[${operationId}] Starting upload of single file: ${fsPath}`);
+
+          await fileUploader.uploadFile(fsPath, storeName);
+
+          uploadOperationManager.updateProgress(operationId, 1, 0, 0);
+          uploadOperationManager.markCompleted(operationId);
+          console.error(`[${operationId}] Upload complete`);
+        }
+      } catch (error: any) {
+        console.error(`[${operationId}] Upload failed:`, error.message);
+        uploadOperationManager.markFailed(operationId, error.message);
+      }
+    })();
+
+    // Return immediately with the operation ID
+    return {
+      content: [{
+        type: 'text',
+        text: `Upload started. Operation ID: ${operationId}\nStatus: pending\nUse file_search_upload_status to check progress.`
+      }]
+    };
   }
 );
 
@@ -125,6 +166,47 @@ server.registerTool(
   async ({ name, force }) => {
     await fileSearchManager.deleteStore(name, force);
     return { content: [{ type: 'text', text: `Deleted store: ${name}` }] };
+  }
+);
+
+server.registerTool(
+  'file_search_upload_status',
+  {
+    description: 'Checks the status of an upload operation. Returns progress information including completed/skipped/failed file counts.',
+    inputSchema: z.object({
+      operationId: z.string().describe('The upload operation ID returned by file_search_upload'),
+    }).shape,
+  },
+  async ({ operationId }) => {
+    const operation = uploadOperationManager.getOperation(operationId);
+
+    if (!operation) {
+      return { isError: true, content: [{ type: 'text', text: `Operation not found: ${operationId}` }] };
+    }
+
+    const percentage = operation.totalFiles > 0
+      ? Math.round(((operation.completedFiles + operation.skippedFiles) / operation.totalFiles) * 100)
+      : 0;
+
+    const statusInfo = {
+      operationId: operation.id,
+      status: operation.status,
+      path: operation.path,
+      storeName: operation.storeName,
+      smartSync: operation.smartSync,
+      progress: {
+        totalFiles: operation.totalFiles,
+        completedFiles: operation.completedFiles,
+        skippedFiles: operation.skippedFiles,
+        failedFiles: operation.failedFiles,
+        percentage,
+      },
+      startedAt: operation.startedAt,
+      completedAt: operation.completedAt,
+      error: operation.error,
+    };
+
+    return { content: [{ type: 'text', text: JSON.stringify(statusInfo, null, 2) }] };
   }
 );
 

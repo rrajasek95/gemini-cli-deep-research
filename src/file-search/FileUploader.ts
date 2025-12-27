@@ -2,6 +2,7 @@ import { GoogleGenAI } from '@google/genai';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
+import ignore, { Ignore } from 'ignore';
 import {
   getMimeTypeWithFallback,
   FILE_SIZE_LIMITS,
@@ -29,6 +30,25 @@ export class FileUploader {
 
   constructor(private client: GoogleGenAI) {
     this.fileSearchManager = new FileSearchManager(client);
+  }
+
+  /**
+   * Loads gitignore rules from a directory.
+   * Looks for .gitignore in the root directory and returns an Ignore instance.
+   */
+  private loadGitignoreRules(rootDir: string): Ignore {
+    const ig = ignore();
+
+    // Always ignore .git directory
+    ig.add('.git');
+
+    const gitignorePath = path.join(rootDir, '.gitignore');
+    if (fs.existsSync(gitignorePath)) {
+      const gitignoreContent = fs.readFileSync(gitignorePath, 'utf-8');
+      ig.add(gitignoreContent);
+    }
+
+    return ig;
   }
 
   /**
@@ -183,11 +203,22 @@ export class FileUploader {
     const maxConcurrent = config?.parallel?.maxConcurrent ?? 5;
     const smartSync = config?.smartSync ?? false;
 
+    // Load gitignore rules from the directory
+    const ig = this.loadGitignoreRules(absoluteDirPath);
+
     const getFiles = (dir: string): string[] => {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       const files: string[] = [];
       for (const entry of entries) {
         const res = path.resolve(dir, entry.name);
+        const relativePath = path.relative(absoluteDirPath, res);
+
+        // Check if path should be ignored (add trailing slash for directories)
+        const checkPath = entry.isDirectory() ? relativePath + '/' : relativePath;
+        if (ig.ignores(checkPath)) {
+          continue;
+        }
+
         if (entry.isDirectory()) {
           files.push(...getFiles(res));
         } else {

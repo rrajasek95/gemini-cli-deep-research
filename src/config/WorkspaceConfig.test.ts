@@ -11,6 +11,7 @@ describe('WorkspaceConfigManager', () => {
     fileSearchStores: {
       'my-store': 'stores/store-456',
     },
+    uploadOperations: {},
   };
 
   beforeEach(() => {
@@ -30,7 +31,7 @@ describe('WorkspaceConfigManager', () => {
     (fs.existsSync as jest.Mock).mockReturnValue(false);
 
     const config = WorkspaceConfigManager.load();
-    expect(config).toEqual({ researchIds: [], fileSearchStores: {} });
+    expect(config).toEqual({ researchIds: [], fileSearchStores: {}, uploadOperations: {} });
   });
 
   it('should save config', () => {

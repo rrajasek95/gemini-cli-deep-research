@@ -39,17 +39,22 @@ jobs:
           # Update gemini-extension.json version
           jq '.version = "${{ steps.version.outputs.VERSION }}"' gemini-extension.json > tmp.json && mv tmp.json gemini-extension.json
 
+      - name: Create release config
+        run: |
+          # Create release-specific gemini-extension.json that runs node directly (no npm required)
+          jq '.mcpServers["gemini-deep-research"].command = "node" | .mcpServers["gemini-deep-research"].args = ["dist/index.js"]' gemini-extension.json > release-gemini-extension.json
+
       - name: Create release archive
         run: |
           mkdir -p release
-          # Create archive with only the necessary files
+          # Create archive with only the necessary runtime files
           tar -czvf release/gemini-deep-research.tar.gz \
+            --transform 's|release-gemini-extension.json|gemini-extension.json|' \
             dist \
             commands \
             node_modules \
-            gemini-extension.json \
-            deep-research-GEMINI.md \
-            package.json
+            release-gemini-extension.json \
+            deep-research-GEMINI.md
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -50,7 +50,7 @@ export class WorkspaceConfigManager {
       const content = fs.readFileSync(this.configPath, 'utf-8');
       const parsed = JSON.parse(content);
       return WorkspaceConfigSchema.parse(parsed);
-    } catch (error) {
+    } catch (_error) {
       // In case of error (e.g. corrupted file), return default or throw?
       // For now, let's return default but maybe log warning?
       // adhering to spec: "Persistence: Stores research IDs and local settings"

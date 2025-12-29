@@ -42,18 +42,14 @@ jobs:
       - name: Create release archive
         run: |
           mkdir -p release
-          # Create archive with all necessary files
+          # Create archive with only the necessary files
           tar -czvf release/gemini-deep-research.tar.gz \
-            --exclude='node_modules' \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='coverage' \
-            --exclude='release' \
-            --exclude='.gemini-research.json' \
-            --exclude='*.log' \
-            --exclude='.npmrc' \
-            --exclude='.env*' \
-            .
+            dist \
+            commands \
+            node_modules \
+            gemini-extension.json \
+            deep-research-GEMINI.md \
+            package.json
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

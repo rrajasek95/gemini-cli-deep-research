@@ -76,6 +76,32 @@ jobs:
 
       - name: Create release archive
         run: |
+          set -e
+          errors=()
+
+          # Validate required directories exist
+          for dir in dist commands node_modules; do
+            if [[ ! -d "$dir" ]]; then
+              errors+=("Missing required directory: $dir")
+            fi
+          done
+
+          # Validate required files exist
+          for file in release/gemini-extension.json deep-research-GEMINI.md; do
+            if [[ ! -f "$file" ]]; then
+              errors+=("Missing required file: $file")
+            fi
+          done
+
+          # Fail if any validation errors
+          if [[ ${#errors[@]} -gt 0 ]]; then
+            echo "Error: Release archive validation failed:"
+            for err in "${errors[@]}"; do
+              echo "  - $err"
+            done
+            exit 1
+          fi
+
           # Create archive with only the necessary runtime files
           tar -czvf release/gemini-deep-research.tar.gz \
             --transform 's|release/gemini-extension.json|gemini-extension.json|' \

@@ -16,3 +16,9 @@ You can also configure the default model used for queries (not the deep research
 2.  `GEMINI_MODEL`
 
 If neither is set, it defaults to `models/gemini-flash-latest`.
+
+You can configure the specific Deep Research agent model (e.g. for newer preview versions) using:
+
+1. `GEMINI_DEEP_RESEARCH_AGENT_MODEL`
+
+If not set, it defaults to `deep-research-pro-preview-12-2025`.

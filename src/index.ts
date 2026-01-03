@@ -13,6 +13,7 @@ import {
 } from '@allenhutchison/gemini-utils';
 import { WorkspaceConfigManager, WorkspaceOperationStorage } from './config/WorkspaceConfig.js';
 import * as fs from 'fs';
+import { setTimeout } from 'timers/promises';
 
 // Initialize SDK and Managers
 const apiKey = process.env.GEMINI_DEEP_RESEARCH_API_KEY || process.env.GEMINI_API_KEY;
@@ -26,6 +27,7 @@ if (!apiKey) {
 const client = new GoogleGenAI({ apiKey });
 
 const defaultModel = process.env.GEMINI_DEEP_RESEARCH_MODEL || process.env.GEMINI_MODEL || 'models/gemini-flash-latest';
+const defaultResearchModel = process.env.GEMINI_DEEP_RESEARCH_AGENT_MODEL || 'deep-research-pro-preview-12-2025';
 
 const fileSearchManager = new FileSearchManager(client);
 const fileUploader = new FileUploader(client);
@@ -260,7 +262,7 @@ server.registerTool(
     inputSchema: z.object({
       input: z.string().describe('The research query or instructions'),
       report_format: z.string().optional().describe('The desired format of the report (e.g., "Executive Brief", "Technical Deep Dive", "Comprehensive Research Report")'),
-      model: z.string().optional().default('deep-research-pro-preview-12-2025').describe('The agent to use (default: deep-research-pro-preview-12-2025)'),
+      model: z.string().optional().default(defaultResearchModel).describe(`The agent to use (default: ${defaultResearchModel})`),
       fileSearchStoreNames: z.array(z.string()).optional().describe('Optional list of file search store names for grounding'),
     }).shape,
   },
@@ -323,6 +325,93 @@ server.registerTool(
     const markdown = reportGenerator.generateMarkdown(interaction.outputs);
     fs.writeFileSync(filePath, markdown);
     return { content: [{ type: 'text', text: `Report saved to ${filePath}` }] };
+  }
+);
+
+server.registerTool(
+  'research_get_report_text',
+  {
+    description: 'Generates a Markdown report from a completed research interaction and returns it as text.',
+    inputSchema: z.object({
+      id: z.string().describe('The interaction ID'),
+    }).shape,
+  },
+  async ({ id }) => {
+    const interaction = await researchManager.getStatus(id);
+    if (interaction.status !== 'completed') {
+      return { isError: true, content: [{ type: 'text', text: `Interaction ${id} is not completed. Current status: ${interaction.status}` }] };
+    }
+    
+    if (!interaction.outputs) {
+      return { isError: true, content: [{ type: 'text', text: 'No outputs found for this interaction.' }] };
+    }
+
+    const markdown = reportGenerator.generateMarkdown(interaction.outputs);
+    return { content: [{ type: 'text', text: markdown }] };
+  }
+);
+
+server.registerTool(
+  'research_perform',
+  {
+    description: 'Synchronously performs Deep Research: starts the task, waits for completion, and returns the final Markdown report. Useful for agents to avoid polling loops.',
+    inputSchema: z.object({
+      input: z.string().describe('The research query or instructions'),
+      report_format: z.string().optional().describe('The desired format of the report'),
+      model: z.string().optional().default(defaultResearchModel).describe(`The agent to use (default: ${defaultResearchModel})`),
+      fileSearchStoreNames: z.array(z.string()).optional().describe('Optional list of file search store names for grounding'),
+      timeoutSeconds: z.number().optional().default(1200).describe('Max seconds to wait (default: 1200/20min)'),
+    }).shape,
+  },
+  async ({ input, report_format, model, fileSearchStoreNames, timeoutSeconds }) => {
+    // 1. Start Research
+    let finalInput = input;
+    if (report_format) {
+      finalInput = `[Report Format: ${report_format}]\n\n${input}`;
+    }
+
+    const startInteraction = await researchManager.startResearch({
+      input: finalInput,
+      model,
+      fileSearchStoreNames,
+    });
+    
+    if (!startInteraction.id) {
+        return { isError: true, content: [{ type: 'text', text: 'Failed to start research interaction.' }] };
+    }
+    
+    WorkspaceConfigManager.addResearchId(startInteraction.id);
+    const researchId = startInteraction.id;
+    console.error(`[research_perform] Started ID: ${researchId}. Waiting up to ${timeoutSeconds}s...`);
+
+    // 2. Poll for Completion
+    const startTime = Date.now();
+    const timeoutMs = timeoutSeconds * 1000;
+    
+    while (Date.now() - startTime < timeoutMs) {
+        const status = await researchManager.getStatus(researchId);
+        
+        if (status.status === 'completed') {
+            // 3. Generate Report
+            if (!status.outputs) {
+                return { isError: true, content: [{ type: 'text', text: 'Research completed but no outputs were found.' }] };
+            }
+            const markdown = reportGenerator.generateMarkdown(status.outputs);
+            return { content: [{ type: 'text', text: markdown }] };
+        }
+        
+        if (status.status === 'failed' || status.status === 'error') {
+            return { isError: true, content: [{ type: 'text', text: `Research failed with status: ${status.status}` }] };
+        }
+
+        // Wait 5s before next poll
+        await setTimeout(5000);
+    }
+
+    return { 
+        isError: true, 
+        content: [{ type: 'text', text: `Research timed out after ${timeoutSeconds} seconds. The task is likely still running in the background (ID: ${researchId}). Use 'research_status' to check later.` }] 
+    };
   }
 );
 
